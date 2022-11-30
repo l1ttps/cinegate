@@ -2,27 +2,18 @@ import { FunctionComponent } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 interface LayoutProps {
-  container?: boolean;
   children: JSX.Element;
 }
 
 const Layout: FunctionComponent<LayoutProps> = (props) => {
-  const { container, children } = props;
+  const { children } = props;
   return (
-    <div className="h-screen">
+    <div className="h-full">
       <Header />
-      {container ? (
-        <div className="container mx-auto">{children}</div>
-      ) : (
-        children
-      )}
+      <div className="h-full mx-auto ">{children}</div>
       <Footer />
     </div>
   );
-};
-
-Layout.defaultProps = {
-  container: true,
 };
 
 export default Layout;

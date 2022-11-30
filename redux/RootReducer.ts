@@ -1,17 +1,18 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import test from "./slices/test";
+import detailMovie from "./slices/detailMovie";
+import homeSelection from "./slices/homeSelection";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  // blacklist: ["collections", "test"],
 };
 
 const rootReducer = combineReducers({
-  test,
+  homeSelection,
+  detailMovie,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
