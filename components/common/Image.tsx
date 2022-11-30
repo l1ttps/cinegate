@@ -4,7 +4,8 @@ import { FunctionComponent } from "react";
 interface ShowImageProps extends ImageProps {}
 
 export const getImage = (url: string) => {
-  return `https://images.weserv.nl/?url=${url}`;
+  // return `https://images.weserv.nl/?url=${url}`;
+  return url;
 };
 
 const Image: FunctionComponent<ShowImageProps> = (props) => {

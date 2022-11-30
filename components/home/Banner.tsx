@@ -3,6 +3,7 @@ import { FunctionComponent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchDetailMovie } from "../../redux/slices/detailMovie";
 import { HomeSection } from "../../shared/types";
+import Image from "../common/Image";
 import Button from "../UI/Button";
 interface BannerProps {
   data: HomeSection;
@@ -30,12 +31,28 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
   return (
     <div
       style={{
-        backgroundImage: `url(${imagePath.href})`,
+        // backgroundImage: `url(${imagePath.href})`,
         backgroundSize: "100% 100%",
       }}
       className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-10"
     >
-      <div className="w-full lg:w-1/2">
+      <div className="absolute top-0 bottom-0 left-0 right-0 z-10">
+        <Image
+          className="hidden md:inline-block z-1"
+          unoptimized
+          src={imagePath.href}
+          alt={filmBanner.title}
+          fill={true}
+        />
+        <Image
+          className="flex z-1 md:hidden"
+          unoptimized
+          src={filmBanner.imageUrl}
+          alt={filmBanner.title}
+          fill={true}
+        />
+      </div>
+      <div className="z-20 w-full lg:w-1/2">
         <div className="flex items-center mb-5 ">
           <div className="flex flex-col items-center justify-center w-12 h-12 mr-5 font-bold text-gray-800 bg-red-600 rounded-lg shadow-lg ">
             <span>TOP</span>
