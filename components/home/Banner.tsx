@@ -3,6 +3,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import getDetailMovie from "../../api/services/getDetailMovie";
 import { useAppDispatch } from "../../hooks/redux";
 import { HomeSection } from "../../shared/types";
+import Image from "../common/Image";
 import Button from "../UI/Button";
 import TagList from "../UI/TagList";
 interface BannerProps {
@@ -43,16 +44,16 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
       }}
       className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-10"
     >
-      <div className="absolute top-0 bottom-0 left-0 right-0 z-10">
-        <img
-          className="hidden md:inline-block z-1 img-banner"
+      <div className="absolute top-0 bottom-0 left-0 right-0 z-10 img-banner">
+        <Image
+          className="hidden md:inline-block z-1"
           unoptimized
           src={imagePath.href}
           alt={filmBanner.title}
           fill={true}
         />
-        <img
-          className="flex z-1 md:hidden img-banner"
+        <Image
+          className="flex z-1 md:hidden"
           unoptimized
           src={filmBanner.imageUrl}
           alt={filmBanner.title}
