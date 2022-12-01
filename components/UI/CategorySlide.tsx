@@ -14,28 +14,17 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
   console.log(data);
 
   return (
-    <div className="flex flex-col">
-      <span className="mb-3 text-2xl font-bold">{title}</span>
-      <div className="relative flex flex-row">
+    <div className="flex flex-col p-10 netflix-slider">
+      <span className="absolute text-2xl font-bold">{title}</span>
+      <div className="relative flex flex-row swiper-container">
         <Swiper
-          breakpoints={{
-            // when window width is >= 640px
-            640: {
-              width: 640,
-              slidesPerView: 2,
-            },
-            // when window width is >= 768px
-            768: {
-              width: 768,
-              slidesPerView: 4,
-            },
-          }}
-          spaceBetween={0}
+          slidesPerView={10}
+          spaceBetween={30}
           pagination={{
             clickable: true,
           }}
           modules={[Pagination]}
-          className="mySwiper"
+          className="swiper-wrapper"
           loop={false}
         >
           {data.map((movie) => (

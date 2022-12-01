@@ -9,9 +9,8 @@ interface CardMovieProps {
 const CardMovie: FunctionComponent<CardMovieProps> = (props) => {
   const { movie } = props;
   return (
-    <div className="hover:scale-110 hover:bg-red-500">
+    <div className="rounded-lg group">
       <Image
-        onClick={() => alert(1)}
         className="rounded-lg cursor-pointer hover:opacity-1"
         height={246}
         width={175}
