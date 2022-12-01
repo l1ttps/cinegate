@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { RecommendContentVOList } from "../../shared/types";
-import Image from "../common/Image";
+import CardMovie from "./CardMovie";
 
 interface CategorySlideProps {
   data: RecommendContentVOList[];
@@ -40,13 +40,7 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
         >
           {data.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <Image
-                className="rounded-lg cursor-pointer hover:opacity-1"
-                height={246}
-                width={175}
-                src={movie.imageUrl}
-                alt={movie.title}
-              />
+              <CardMovie movie={movie} />
             </SwiperSlide>
           ))}
         </Swiper>
