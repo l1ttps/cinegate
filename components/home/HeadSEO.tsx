@@ -20,6 +20,10 @@ const HeadSEO = () => {
         name="og:title"
         content="CineGate Watch HD movies online for free"
       ></meta>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
+      />
     </Head>
   );
 };

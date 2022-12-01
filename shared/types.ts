@@ -362,3 +362,8 @@ export interface Favorite {
   name: string;
   createdAt: number;
 }
+
+export enum WatchType {
+  TV = "tv",
+  MOVIE = "movie",
+}

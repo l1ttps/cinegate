@@ -1,4 +1,4 @@
-import { InformationCircleIcon, PlayIcon } from "@heroicons/react/20/solid";
+import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import { FunctionComponent, useEffect, useState } from "react";
 import getDetailMovie from "../../api/services/getDetailMovie";
 import { useAppDispatch } from "../../hooks/redux";
@@ -6,10 +6,11 @@ import {
   fetchDetailMovie,
   openPopupDetailMovie,
 } from "../../redux/slices/detailMovie";
-import { Favorite, HomeSection } from "../../shared/types";
+import { Favorite, HomeSection, Movie } from "../../shared/types";
 import Image from "../common/Image";
 import AddFavorite from "../UI/AddFavorite";
 import Button from "../UI/Button";
+import PlayButton from "../UI/PlayButton";
 import TagList from "../UI/TagList";
 import ViewDescription from "../UI/ViewDescription";
 interface BannerProps {
@@ -22,15 +23,13 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
   const top = 3;
   const filmBanner = data.recommendContentVOList[top - 1];
   // const detailMovie = useAppSelector((store) => store.detailMovie);
-  const [detailMovie, setDetailMovie] = useState<any>();
+  const [detailMovie, setDetailMovie] = useState<Movie>();
 
   useEffect(() => {
     (async () => {
       if (filmBanner) {
         const { id, category } = filmBanner;
         const _detailMovie = await getDetailMovie(id, category);
-        console.log(_detailMovie, "_detailMovie");
-
         setDetailMovie(_detailMovie);
       }
     })();
@@ -50,7 +49,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
   const handleClickDetailMovie = () => {
     const { id, category } = detailMovie;
     dispatch(openPopupDetailMovie());
-    dispatch(fetchDetailMovie({ id, category }));
+    dispatch(fetchDetailMovie({ id: parseInt(id), category }));
   };
 
   return (
@@ -90,13 +89,8 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
         </div>
         <div className="text-5xl text-shadow">{filmBanner.title}</div>
         <ViewDescription text={detailMovie?.introduction.split(".")[0]} />
-        <div className="flex gap-3">
-          <Button variant="primary">
-            <div className="flex items-center">
-              <PlayIcon className="mr-1" width={30} />
-              <span>Play</span>
-            </div>
-          </Button>
+        <div className="flex items-center gap-3">
+          <PlayButton movie={detailMovie} />
           <Button onClick={handleClickDetailMovie} variant="secondary">
             <div className="flex items-center">
               <InformationCircleIcon className="mr-1" width={30} />

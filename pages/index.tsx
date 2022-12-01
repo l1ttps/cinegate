@@ -1,11 +1,12 @@
-import { FunctionComponent, useEffect } from "react";
+import { NextPage } from "next";
+import { useEffect } from "react";
 import Banner from "../components/home/Banner";
 import Layout from "../components/Layout";
 import CategorySlide from "../components/UI/CategorySlide";
 import Splash from "../components/UI/Splash";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchHomeSelection } from "../redux/slices/homeSelection";
-const Home: FunctionComponent = () => {
+const Home: NextPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const Home: FunctionComponent = () => {
   }
 
   return (
-    <Layout>
+    <Layout withoutPadding>
       <>
         <Banner data={homeSelection.data[0]} />
         <div className="flex flex-col absolute left-0 right-0 top-[78%] z-[30]">

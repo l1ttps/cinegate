@@ -31,7 +31,7 @@ const AddFavorite: FC<AddFavoriteProps> = ({ favorite }) => {
   return (
     <div
       onClick={handleOnClick}
-      className="w-12 p-1 border-2 rounded-full cursor-pointer center h-1w-12 hover:bg-stone-600 "
+      className="w-8 h-8 p-1 border-2 rounded-full cursor-pointer center hover:bg-stone-600 "
       title="Add favorite"
     >
       {isFavorited ? (

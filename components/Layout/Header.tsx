@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Image from "next/image";
+import Link from "next/link";
 import { FunctionComponent, useState } from "react";
 import logo from "../../assets/images/logo.png";
 const HEIGHT = 200;
@@ -26,13 +27,15 @@ const Header: FunctionComponent = () => {
         fillBg && "bg-default shadow-lg"
       )}
     >
-      <Image
-        width={150}
-        height={75}
-        src={logo}
-        loader={() => logo}
-        alt="CineGate"
-      />
+      <Link href={"/"}>
+        <Image
+          width={150}
+          height={75}
+          src={logo}
+          loader={() => logo}
+          alt="CineGate"
+        />
+      </Link>
     </div>
   );
 };
