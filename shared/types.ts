@@ -354,3 +354,11 @@ export interface UpdateInfo {
   updatePeriod: string;
   updateStatus: number;
 }
+
+export interface Favorite {
+  id: string;
+  coverHorizontalUrl: string;
+  coverVerticalUrl: string;
+  name: string;
+  createdAt: number;
+}

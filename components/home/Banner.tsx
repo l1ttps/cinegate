@@ -2,8 +2,9 @@ import { InformationCircleIcon, PlayIcon } from "@heroicons/react/20/solid";
 import { FunctionComponent, useEffect, useState } from "react";
 import getDetailMovie from "../../api/services/getDetailMovie";
 import { useAppDispatch } from "../../hooks/redux";
-import { HomeSection } from "../../shared/types";
+import { Favorite, HomeSection } from "../../shared/types";
 import Image from "../common/Image";
+import AddFavorite from "../UI/AddFavorite";
 import Button from "../UI/Button";
 import TagList from "../UI/TagList";
 import ViewDescription from "../UI/ViewDescription";
@@ -35,7 +36,13 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
     return <></>;
   }
   const imagePath = new URL(detailMovie?.coverHorizontalUrl as string);
-  console.log(detailMovie);
+  const dataFavorite: Favorite = {
+    id: detailMovie.id,
+    coverHorizontalUrl: detailMovie.coverHorizontalUrl,
+    coverVerticalUrl: detailMovie.coverVerticalUrl,
+    createdAt: new Date().valueOf(),
+    name: detailMovie.name,
+  };
 
   return (
     <div
@@ -87,6 +94,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
               <span>View detail</span>
             </div>
           </Button>
+          <AddFavorite favorite={dataFavorite} />
         </div>
         <div>
           <TagList tagList={detailMovie.tagList} />

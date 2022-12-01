@@ -2,6 +2,8 @@ import { PlayIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import React, { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { closePopupDetailMovie } from "../../redux/slices/detailMovie";
+import { Favorite } from "../../shared/types";
+import AddFavorite from "./AddFavorite";
 import BackdropLoading from "./BackdropLoading";
 import Button from "./Button";
 import MoreLikeThis from "./MoreLikeThis";
@@ -9,7 +11,6 @@ import TagList from "./TagList";
 import ViewDescription from "./ViewDescription";
 import ViewVote from "./ViewVote";
 import ViewYear from "./ViewYear";
-
 interface IProps {
   isOpen?: boolean;
   onClose?: () => void;
@@ -22,25 +23,36 @@ const Modal = (props: IProps) => {
   const detailMovie = useAppSelector((store) => store.detailMovie);
   const dispatch = useAppDispatch();
   const movie = detailMovie.data;
+
   const onClose = () => {
     dispatch(closePopupDetailMovie());
   };
-  if (!detailMovie.data) {
+
+  if (!movie) {
     return <></>;
   }
+
   if (detailMovie.loading) {
     return <BackdropLoading />;
   }
   console.log(detailMovie);
 
-  const imagePath = new URL(detailMovie.data?.coverHorizontalUrl as string);
+  const imagePath = new URL(movie?.coverHorizontalUrl as string);
+
+  const dataFavorite: Favorite = {
+    id: movie.id,
+    coverHorizontalUrl: movie.coverHorizontalUrl,
+    coverVerticalUrl: movie.coverVerticalUrl,
+    createdAt: new Date().valueOf(),
+    name: movie.name,
+  };
+
   return (
     <div
       onClick={onClose}
       className={`fixed z-[500] overflow-auto flex top-0  justify-center w-full h-screen 
       transition-all duration-500 cursor-pointer bg-black/60
-      ${!detailMovie.isOpen && "hidden"}
-      `}
+      ${!detailMovie.isOpen && "hidden"}`}
     >
       <div
         onClick={(e) => {
@@ -59,27 +71,30 @@ const Modal = (props: IProps) => {
             <img
               className="hidden md:inline-block z-1 rounded-xl"
               src={imagePath.href}
-              alt={detailMovie.data?.name as string}
+              alt={movie?.name as string}
             />
           </picture>
         </div>
         <div className="flex gap-3 flex-col  top-[60%] px-10 mx-auto">
-          <Button variant="primary">
-            <div className="flex items-center">
-              <PlayIcon className="mr-1" width={30} />
-              <span>Play</span>
-            </div>
-          </Button>
-          <span className="text-2xl font-bold">{detailMovie.data.name}</span>
+          <div className="flex gap-3">
+            <Button variant="primary">
+              <div className="flex items-center">
+                <PlayIcon className="mr-1" width={30} />
+                <span>Play</span>
+              </div>
+            </Button>
+            <AddFavorite favorite={dataFavorite} />
+          </div>
+          <span className="text-2xl font-bold">{movie.name}</span>
           <div className="flex">
             <div className="mr-3">
-              <ViewYear year={detailMovie.data.year} />
+              <ViewYear year={movie.year} />
             </div>
-            <ViewVote score={detailMovie.data.score} />
+            <ViewVote score={movie.score} />
           </div>
-          <ViewDescription text={detailMovie.data.introduction} />
-          <TagList tagList={detailMovie.data.tagList} />
-          <MoreLikeThis likeList={detailMovie.data.likeList} />
+          <ViewDescription text={movie.introduction} />
+          <TagList tagList={movie.tagList} />
+          <MoreLikeThis likeList={movie.likeList} />
         </div>
       </div>
     </div>
