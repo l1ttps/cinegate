@@ -55,7 +55,7 @@ const Button = (props: IButtonProps) => {
   return (
     <button
       {...props}
-      className={`py-3 px-6 text-lg font-semibold rounded-xl w-fit flex flex-row items-center justify-center
+      className={`py-2 px-6 text-lg font-semibold rounded-xl w-fit flex flex-row items-center justify-center
             transition duration-200 active:scale-95
              ${style[disabled ? "disabled" : variant].style} ${
         style[variant].textStyle

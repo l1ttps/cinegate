@@ -2,9 +2,9 @@ import { FunctionComponent, useEffect } from "react";
 import Banner from "../components/home/Banner";
 import Layout from "../components/Layout";
 import CategorySlide from "../components/UI/CategorySlide";
+import Splash from "../components/UI/Splash";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchHomeSelection } from "../redux/slices/homeSelection";
-
 const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
 
@@ -15,7 +15,7 @@ const Home: FunctionComponent = () => {
   const homeSelection = useAppSelector((store) => store.homeSelection);
 
   if (homeSelection.data.length === 0) {
-    return <></>;
+    return <Splash />;
   }
 
   return (

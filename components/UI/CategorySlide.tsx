@@ -28,7 +28,7 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
             },
 
             1024: {
-              slidesPerView: 10,
+              slidesPerView: 8,
               spaceBetween: 50,
             },
           }}

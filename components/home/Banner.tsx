@@ -6,6 +6,7 @@ import { HomeSection } from "../../shared/types";
 import Image from "../common/Image";
 import Button from "../UI/Button";
 import TagList from "../UI/TagList";
+import ViewDescription from "../UI/ViewDescription";
 interface BannerProps {
   data: HomeSection;
 }
@@ -13,7 +14,7 @@ interface BannerProps {
 const Banner: FunctionComponent<BannerProps> = (props) => {
   const dispatch = useAppDispatch();
   const { data } = props;
-  const top = 1;
+  const top = 3;
   const filmBanner = data.recommendContentVOList[top - 1];
   // const detailMovie = useAppSelector((store) => store.detailMovie);
   const [detailMovie, setDetailMovie] = useState<any>();
@@ -60,8 +61,8 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
           fill={true}
         />
       </div>
-      <div className="z-20 w-full lg:w-1/2">
-        <div className="flex items-center mb-5 ">
+      <div className="z-20 flex flex-col w-full gap-3 lg:w-1/2">
+        <div className="flex items-center ">
           <div className="flex flex-col items-center justify-center w-12 h-12 mr-5 font-bold text-gray-800 bg-red-600 rounded-lg shadow-lg ">
             <span>TOP</span>
             <span>{data.recommendContentVOList.length}</span>
@@ -72,11 +73,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
           </div>
         </div>
         <div className="text-5xl text-shadow">{filmBanner.title}</div>
-        <div className="pl-3 pr-1 my-5 border-l-4 border-red-500 w-fit rounded-tr-xl rounded-bl-xl bg-stone-800/30">
-          <span className="text-lg text-shadow">
-            {detailMovie?.introduction.split(".")[0]}...
-          </span>
-        </div>
+        <ViewDescription text={detailMovie?.introduction.split(".")[0]} />
         <div className="flex gap-3">
           <Button variant="primary">
             <div className="flex items-center">

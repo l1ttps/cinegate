@@ -2,9 +2,13 @@ import { PlayIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import React, { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { closePopupDetailMovie } from "../../redux/slices/detailMovie";
+import BackdropLoading from "./BackdropLoading";
 import Button from "./Button";
 import MoreLikeThis from "./MoreLikeThis";
 import TagList from "./TagList";
+import ViewDescription from "./ViewDescription";
+import ViewVote from "./ViewVote";
+import ViewYear from "./ViewYear";
 
 interface IProps {
   isOpen?: boolean;
@@ -25,7 +29,7 @@ const Modal = (props: IProps) => {
     return <></>;
   }
   if (detailMovie.loading) {
-    return <div>loading</div>;
+    return <BackdropLoading />;
   }
   console.log(detailMovie);
 
@@ -60,14 +64,20 @@ const Modal = (props: IProps) => {
           </picture>
         </div>
         <div className="flex gap-3 flex-col  top-[60%] px-10 mx-auto">
-          <div className="flex gap-3">
-            <Button variant="primary">
-              <div className="flex items-center">
-                <PlayIcon className="mr-1" width={30} />
-                <span>Play</span>
-              </div>
-            </Button>
+          <Button variant="primary">
+            <div className="flex items-center">
+              <PlayIcon className="mr-1" width={30} />
+              <span>Play</span>
+            </div>
+          </Button>
+          <span className="text-2xl font-bold">{detailMovie.data.name}</span>
+          <div className="flex">
+            <div className="mr-3">
+              <ViewYear year={detailMovie.data.year} />
+            </div>
+            <ViewVote score={detailMovie.data.score} />
           </div>
+          <ViewDescription text={detailMovie.data.introduction} />
           <TagList tagList={detailMovie.data.tagList} />
           <MoreLikeThis likeList={detailMovie.data.likeList} />
         </div>
