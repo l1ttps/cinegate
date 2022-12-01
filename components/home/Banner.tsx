@@ -2,6 +2,10 @@ import { InformationCircleIcon, PlayIcon } from "@heroicons/react/20/solid";
 import { FunctionComponent, useEffect, useState } from "react";
 import getDetailMovie from "../../api/services/getDetailMovie";
 import { useAppDispatch } from "../../hooks/redux";
+import {
+  fetchDetailMovie,
+  openPopupDetailMovie,
+} from "../../redux/slices/detailMovie";
 import { Favorite, HomeSection } from "../../shared/types";
 import Image from "../common/Image";
 import AddFavorite from "../UI/AddFavorite";
@@ -42,6 +46,11 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
     coverVerticalUrl: detailMovie.coverVerticalUrl,
     createdAt: new Date().valueOf(),
     name: detailMovie.name,
+  };
+  const handleClickDetailMovie = () => {
+    const { id, category } = detailMovie;
+    dispatch(openPopupDetailMovie());
+    dispatch(fetchDetailMovie({ id, category }));
   };
 
   return (
@@ -88,7 +97,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
               <span>Play</span>
             </div>
           </Button>
-          <Button variant="secondary">
+          <Button onClick={handleClickDetailMovie} variant="secondary">
             <div className="flex items-center">
               <InformationCircleIcon className="mr-1" width={30} />
               <span>View detail</span>

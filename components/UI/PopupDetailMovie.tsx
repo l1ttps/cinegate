@@ -28,13 +28,14 @@ const Modal = (props: IProps) => {
     dispatch(closePopupDetailMovie());
   };
 
+  if (detailMovie.loading) {
+    return <BackdropLoading />;
+  }
+
   if (!movie) {
     return <></>;
   }
 
-  if (detailMovie.loading) {
-    return <BackdropLoading />;
-  }
   console.log(detailMovie);
 
   const imagePath = new URL(movie?.coverHorizontalUrl as string);
