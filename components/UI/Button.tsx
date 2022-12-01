@@ -14,7 +14,7 @@ const style = {
     textStyle: "text-black",
   },
   secondary: {
-    style: "bg-gray-600/60 transition-opacity-100",
+    style: "bg-stone-700/80 transition-opacity-100",
     underlayColor: "#f5f5f5",
     textStyle: "text-white",
   },

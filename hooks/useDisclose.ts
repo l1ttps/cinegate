@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useDisclose = (defaultOpen: boolean) => {
+const useDisclose = (defaultOpen?: boolean) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const onOpen = () => setIsOpen(true);
   const onClose = () => setIsOpen(false);

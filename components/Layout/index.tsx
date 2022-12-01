@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import PopupDetailMovie from "../UI/PopupDetailMovie";
 import Footer from "./Footer";
 import Header from "./Header";
 interface LayoutProps {
@@ -12,6 +13,7 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
       <Header />
       <div className="h-full mx-auto ">{children}</div>
       <Footer />
+      <PopupDetailMovie />
     </div>
   );
 };

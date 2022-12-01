@@ -1,10 +1,10 @@
 import { InformationCircleIcon, PlayIcon } from "@heroicons/react/20/solid";
-import { FunctionComponent, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchDetailMovie } from "../../redux/slices/detailMovie";
+import { FunctionComponent, useEffect, useState } from "react";
+import getDetailMovie from "../../api/services/getDetailMovie";
+import { useAppDispatch } from "../../hooks/redux";
 import { HomeSection } from "../../shared/types";
-import Image from "../common/Image";
 import Button from "../UI/Button";
+import TagList from "../UI/TagList";
 interface BannerProps {
   data: HomeSection;
 }
@@ -12,21 +12,28 @@ interface BannerProps {
 const Banner: FunctionComponent<BannerProps> = (props) => {
   const dispatch = useAppDispatch();
   const { data } = props;
-  const top = 3;
+  const top = 1;
   const filmBanner = data.recommendContentVOList[top - 1];
-  const detailMovie = useAppSelector((store) => store.detailMovie);
+  // const detailMovie = useAppSelector((store) => store.detailMovie);
+  const [detailMovie, setDetailMovie] = useState<any>();
 
   useEffect(() => {
-    if (filmBanner) {
-      const { id, category } = filmBanner;
-      dispatch(fetchDetailMovie({ id, category }));
-    }
+    (async () => {
+      if (filmBanner) {
+        const { id, category } = filmBanner;
+        const _detailMovie = await getDetailMovie(id, category);
+        console.log(_detailMovie, "_detailMovie");
+
+        setDetailMovie(_detailMovie);
+      }
+    })();
   }, [dispatch, filmBanner]);
 
-  if (!detailMovie.data) {
+  if (!detailMovie) {
     return <></>;
   }
-  const imagePath = new URL(detailMovie.data?.coverHorizontalUrl as string);
+  const imagePath = new URL(detailMovie?.coverHorizontalUrl as string);
+  console.log(detailMovie);
 
   return (
     <div
@@ -37,15 +44,15 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
       className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-10"
     >
       <div className="absolute top-0 bottom-0 left-0 right-0 z-10">
-        <Image
-          className="hidden md:inline-block z-1"
+        <img
+          className="hidden md:inline-block z-1 img-banner"
           unoptimized
           src={imagePath.href}
           alt={filmBanner.title}
           fill={true}
         />
-        <Image
-          className="flex z-1 md:hidden"
+        <img
+          className="flex z-1 md:hidden img-banner"
           unoptimized
           src={filmBanner.imageUrl}
           alt={filmBanner.title}
@@ -66,7 +73,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
         <div className="text-5xl text-shadow">{filmBanner.title}</div>
         <div className="pl-3 pr-1 my-5 border-l-4 border-red-500 w-fit rounded-tr-xl rounded-bl-xl bg-stone-800/30">
           <span className="text-lg text-shadow">
-            {detailMovie.data?.introduction.split(".")[0]}...
+            {detailMovie?.introduction.split(".")[0]}...
           </span>
         </div>
         <div className="flex gap-3">
@@ -82,6 +89,9 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
               <span>View detail</span>
             </div>
           </Button>
+        </div>
+        <div>
+          <TagList tagList={detailMovie.tagList} />
         </div>
       </div>
     </div>

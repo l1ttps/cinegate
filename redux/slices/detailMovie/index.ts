@@ -13,14 +13,26 @@ export const fetchDetailMovie = createAsyncThunk(
 interface HomeSectionState {
   data: Movie | null;
   loading: boolean;
+  isOpen: boolean;
 }
 
-const initialState: HomeSectionState = { data: null, loading: false };
+const initialState: HomeSectionState = {
+  data: null,
+  loading: false,
+  isOpen: false,
+};
 
 const detailMovieSlice = createSlice({
   name: "detailMovie",
   initialState,
-  reducers: {},
+  reducers: {
+    openPopupDetailMovie: (state) => {
+      state.isOpen = true;
+    },
+    closePopupDetailMovie: (state) => {
+      state.isOpen = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDetailMovie.fulfilled, (state, action) => {
@@ -35,5 +47,8 @@ const detailMovieSlice = createSlice({
       });
   },
 });
+
+export const { openPopupDetailMovie, closePopupDetailMovie } =
+  detailMovieSlice.actions;
 
 export default detailMovieSlice.reducer;

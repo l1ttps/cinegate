@@ -11,7 +11,6 @@ interface CategorySlideProps {
 
 const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
   const { data, title } = props;
-  console.log(data);
 
   return (
     <div className="flex flex-col p-10 netflix-slider">

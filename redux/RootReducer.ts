@@ -8,6 +8,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  blacklist: ["detailMovie", "homeSelection"],
 };
 
 const rootReducer = combineReducers({
