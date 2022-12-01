@@ -17,7 +17,7 @@ interface HomeSectionState {
 
 const initialState: HomeSectionState = { data: null, loading: false };
 
-const testSlice = createSlice({
+const detailMovieSlice = createSlice({
   name: "detailMovie",
   initialState,
   reducers: {},
@@ -36,4 +36,4 @@ const testSlice = createSlice({
   },
 });
 
-export default testSlice.reducer;
+export default detailMovieSlice.reducer;

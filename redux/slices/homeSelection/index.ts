@@ -16,7 +16,7 @@ interface HomeSectionState {
 
 const initialState: HomeSectionState = { data: [], loading: false };
 
-const testSlice = createSlice({
+const homeSelectionSlice = createSlice({
   name: "homeSelection",
   initialState,
   reducers: {},
@@ -35,4 +35,4 @@ const testSlice = createSlice({
   },
 });
 
-export default testSlice.reducer;
+export default homeSelectionSlice.reducer;

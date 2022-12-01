@@ -12,7 +12,7 @@ interface BannerProps {
 const Banner: FunctionComponent<BannerProps> = (props) => {
   const dispatch = useAppDispatch();
   const { data } = props;
-  const top = 2;
+  const top = 3;
   const filmBanner = data.recommendContentVOList[top - 1];
   const detailMovie = useAppSelector((store) => store.detailMovie);
 
@@ -64,7 +64,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
           </div>
         </div>
         <div className="text-5xl text-shadow">{filmBanner.title}</div>
-        <div className="pl-3 pr-1 my-5 border-l-4 border-red-500 rounded-tr-xl rounded-bl-xl bg-stone-800/30">
+        <div className="pl-3 pr-1 my-5 border-l-4 border-red-500 w-fit rounded-tr-xl rounded-bl-xl bg-stone-800/30">
           <span className="text-lg text-shadow">
             {detailMovie.data?.introduction.split(".")[0]}...
           </span>

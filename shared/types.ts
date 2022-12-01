@@ -9,23 +9,24 @@ export interface HomeSection {
   homeSectionId: number;
   homeSectionName: string;
   homeSectionType: string;
-  recommendContentVOList: {
-    contentType: string;
-    id: number;
-    imageUrl: string;
-    jumpAddress: string;
-    jumpType: string;
-    needLogin: boolean;
-    resourceNum?: any;
-    resourceStatus?: any;
-    showMark: boolean;
-    title: string;
-    category: number;
-  }[];
+  recommendContentVOList: RecommendContentVOList[];
   refId?: any;
   refRedirectUrl: string;
 }
 
+export interface RecommendContentVOList {
+  contentType: string;
+  id: number;
+  imageUrl: string;
+  jumpAddress: string;
+  jumpType: string;
+  needLogin: boolean;
+  resourceNum?: any;
+  resourceStatus?: any;
+  showMark: boolean;
+  title: string;
+  category: number;
+}
 export interface TopSearched {
   cover: string;
   domainType: number;

@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect } from "react";
 import Banner from "../components/home/Banner";
 import Layout from "../components/Layout";
+import CategorySlide from "../components/UI/CategorySlide";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchHomeSelection } from "../redux/slices/homeSelection";
 
@@ -16,10 +17,21 @@ const Home: FunctionComponent = () => {
   if (homeSelection.data.length === 0) {
     return <></>;
   }
+  console.log(homeSelection);
+
   return (
     <Layout>
       <>
         <Banner data={homeSelection.data[0]} />
+        <div className="flex  flex-col gap-16 px-10 absolute left-0 right-0 top-[78%] z-[100]">
+          {homeSelection.data.map((list) => (
+            <CategorySlide
+              key={list.refId}
+              data={list.recommendContentVOList}
+              title={list.homeSectionName}
+            />
+          ))}
+        </div>
       </>
     </Layout>
   );
