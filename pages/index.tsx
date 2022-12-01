@@ -22,7 +22,7 @@ const Home: FunctionComponent = () => {
     <Layout>
       <>
         <Banner data={homeSelection.data[0]} />
-        <div className="flex flex-col absolute left-0 right-0 top-[78%] z-[100]">
+        <div className="flex flex-col absolute left-0 right-0 top-[78%] z-[30]">
           {homeSelection.data.map((list) => (
             <CategorySlide
               key={list.refId}

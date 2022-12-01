@@ -21,7 +21,7 @@ const Header: FunctionComponent = () => {
     <div
       className={classNames(
         [
-          "fixed flex left-0 right-0 flex-row items-center w-full p-5 px-10 mx-auto text-4xl font-bold uppercase z-[1000] h-14",
+          "fixed flex left-0 right-0 flex-row items-center w-full p-5 px-10 mx-auto text-4xl font-bold uppercase z-[100] h-14",
         ],
         fillBg && "bg-default shadow-lg"
       )}

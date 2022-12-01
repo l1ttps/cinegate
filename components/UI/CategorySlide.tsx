@@ -17,8 +17,21 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
       <span className="absolute text-2xl font-bold">{title}</span>
       <div className="relative flex flex-row swiper-container">
         <Swiper
-          slidesPerView={10}
-          spaceBetween={30}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+
+            1024: {
+              slidesPerView: 10,
+              spaceBetween: 50,
+            },
+          }}
           pagination={{
             clickable: true,
           }}
