@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
 import Banner from "../components/home/Banner";
-import HeadSEO from "../components/home/HeadSEO";
 import Layout from "../components/Layout";
 import CategorySlide from "../components/UI/CategorySlide";
 import Splash from "../components/UI/Splash";
@@ -22,7 +21,6 @@ const Home: FunctionComponent = () => {
   return (
     <Layout>
       <>
-        <HeadSEO />
         <Banner data={homeSelection.data[0]} />
         <div className="flex flex-col absolute left-0 right-0 top-[78%] z-[30]">
           {homeSelection.data.map((list) => (

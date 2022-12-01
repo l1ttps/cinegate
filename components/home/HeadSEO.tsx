@@ -9,7 +9,7 @@ const HeadSEO = () => {
       </title>
       <meta
         name="og:description"
-        content="Popular episodes updated quickly,American hot seriesTension, comedy, thriller,Newest hottest dramasall in Loklok"
+        content="Popular episodes updated quickly,American hot seriesTension, comedy, thriller,Newest hottest dramasall in CineGate"
       />
 
       <meta
