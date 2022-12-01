@@ -17,7 +17,6 @@ const Home: FunctionComponent = () => {
   if (homeSelection.data.length === 0) {
     return <></>;
   }
-  console.log(homeSelection);
 
   return (
     <Layout>
