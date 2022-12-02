@@ -3,13 +3,12 @@ import Head from "next/head";
 import ReactPlayer from "react-player";
 import getDetailMovie from "../../api/services/getDetailMovie";
 import Layout from "../../components/Layout";
-import AddFavorite from "../../components/UI/AddFavorite";
 import MoreLikeThis from "../../components/UI/MoreLikeThis";
 import TagList from "../../components/UI/TagList";
 import ViewDescription from "../../components/UI/ViewDescription";
 import ViewVote from "../../components/UI/ViewVote";
 import ViewYear from "../../components/UI/ViewYear";
-import { Favorite, Movie, WatchType } from "../../shared/types";
+import { Movie, WatchType } from "../../shared/types";
 interface WatchViewProps {
   watchType: WatchType.TV | WatchType.MOVIE;
   id: number;
@@ -18,13 +17,13 @@ interface WatchViewProps {
 
 const WatchView: NextPage<WatchViewProps> = (props) => {
   const { movie } = props;
-  const dataFavorite: Favorite = {
-    id: movie.id,
-    coverHorizontalUrl: movie.coverHorizontalUrl,
-    coverVerticalUrl: movie.coverVerticalUrl,
-    createdAt: new Date().valueOf(),
-    name: movie.name,
-  };
+  // const dataFavorite: Favorite = {
+  //   id: movie.id,
+  //   coverHorizontalUrl: movie.coverHorizontalUrl,
+  //   coverVerticalUrl: movie.coverVerticalUrl,
+  //   createdAt: new Date().valueOf(),
+  //   name: movie.name,
+  // };
   return (
     <>
       <Head>
@@ -42,7 +41,7 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
             />
             <div className="flex items-center justify-between w-full">
               <span className="text-2xl font-bold">{movie.name}</span>
-              <AddFavorite favorite={dataFavorite} />
+              {/* <AddFavorite favorite={dataFavorite} /> */}
             </div>
             <div className="flex gap-3">
               <ViewYear year={movie.year} />
