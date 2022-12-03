@@ -13,6 +13,7 @@ import ViewVote from "../../components/UI/ViewVote";
 import ViewYear from "../../components/UI/ViewYear";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchDetailMovie } from "../../redux/slices/detailMovie";
+import { addHistory } from "../../redux/slices/history";
 import { Favorite, Movie, WatchType } from "../../shared/types";
 interface WatchViewProps {
   watchType: WatchType.TV | WatchType.MOVIE;
@@ -28,10 +29,27 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
   const detailMovie = useAppSelector((store) => store.detailMovie);
   const movie = detailMovie.data;
   const category = watchType === WatchType.TV ? 1 : 0;
+
   useEffect(() => {
     !movie &&
       dispatch(fetchDetailMovie({ id: parseInt(id as string), category }));
   }, [category, dispatch, id, movie, watchType]);
+
+  useEffect(() => {
+    if (!!movie) {
+      dispatch(
+        addHistory({
+          id: movie.id,
+          coverHorizontalUrl: movie.coverHorizontalUrl,
+          createdAt: new Date().valueOf(),
+          currentTime: 0,
+          totalTime: 0,
+          name: movie.name,
+          episodeId,
+        })
+      );
+    }
+  }, [dispatch, movie]);
 
   if (!movie) {
     return <BackdropLoading />;
@@ -40,7 +58,6 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
   const dataFavorite: Favorite = {
     id: movie.id,
     coverHorizontalUrl: movie.coverHorizontalUrl,
-    coverVerticalUrl: movie.coverVerticalUrl,
     createdAt: new Date().valueOf(),
     name: movie.name,
   };
@@ -51,12 +68,13 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
         <title>{movie.name}</title>
       </Head>
       <Layout>
-        <div className="grid grid-cols-4 gap-3 ">
+        <div className="grid grid-cols-4 gap-5 p-5">
           <div className="flex flex-col col-span-3 gap-3">
             <MediaPlayer
+              episodeId={episodeId}
+              movie={movie}
               category={category}
               id={movie.id}
-              episode={movie.episodeVo[episodeId]}
             />
             <div className="flex items-center justify-between w-full">
               <span className="text-2xl font-bold">{movie.name}</span>
@@ -69,7 +87,9 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
             <ViewDescription text={movie.introduction} />
             <TagList tagList={movie.tagList} />
           </div>
-          <MoreLikeThis forceGridCol likeList={movie.likeList} />
+          <div className="col-span-1">
+            <MoreLikeThis forceGridCol likeList={movie.likeList} />
+          </div>
         </div>
       </Layout>
     </>

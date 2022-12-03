@@ -8,6 +8,7 @@ import BackdropLoading from "./BackdropLoading";
 import MoreLikeThis from "./MoreLikeThis";
 import PlayButton from "./PlayButton";
 import TagList from "./TagList";
+import TimeLinePlayed from "./TimeLinePlayed";
 import ViewDescription from "./ViewDescription";
 import ViewVote from "./ViewVote";
 import ViewYear from "./ViewYear";
@@ -43,7 +44,6 @@ const Modal = (props: IProps) => {
   const dataFavorite: Favorite = {
     id: movie.id,
     coverHorizontalUrl: movie.coverHorizontalUrl,
-    coverVerticalUrl: movie.coverVerticalUrl,
     createdAt: new Date().valueOf(),
     name: movie.name,
   };
@@ -81,6 +81,7 @@ const Modal = (props: IProps) => {
             <PlayButton movie={movie} />
             <AddFavorite favorite={dataFavorite} />
           </div>
+          <TimeLinePlayed movieId={movie.id} />
           <span className="text-2xl font-bold">{movie.name}</span>
           <div className="flex">
             <div className="mr-3">

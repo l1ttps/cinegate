@@ -358,9 +358,14 @@ export interface UpdateInfo {
 export interface Favorite {
   id: string;
   coverHorizontalUrl: string;
-  coverVerticalUrl: string;
   name: string;
   createdAt: number;
+}
+
+export interface History extends Favorite {
+  totalTime: number;
+  currentTime: number;
+  episodeId: number;
 }
 
 export enum WatchType {

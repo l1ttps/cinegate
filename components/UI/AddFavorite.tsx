@@ -29,16 +29,19 @@ const AddFavorite: FC<AddFavoriteProps> = ({ favorite }) => {
     dispatch(addFavorite(favorite));
   };
   return (
-    <div
-      onClick={handleOnClick}
-      className="w-8 h-8 p-1 border-2 rounded-full cursor-pointer center hover:bg-stone-600 "
-      title="Add favorite"
-    >
-      {isFavorited ? (
-        <CheckIcon {...defaultPropsIcon} />
-      ) : (
-        <PlusIcon {...defaultPropsIcon} />
-      )}
+    <div className="flex items-center gap-2">
+      <div
+        onClick={handleOnClick}
+        className="w-8 h-8 p-1 border-2 rounded-full cursor-pointer center hover:bg-stone-600 "
+        title="Add favorite"
+      >
+        {isFavorited ? (
+          <CheckIcon {...defaultPropsIcon} />
+        ) : (
+          <PlusIcon {...defaultPropsIcon} />
+        )}
+      </div>
+      <span>My list</span>
     </div>
   );
 };

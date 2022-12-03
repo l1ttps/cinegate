@@ -12,6 +12,7 @@ import AddFavorite from "../UI/AddFavorite";
 import Button from "../UI/Button";
 import PlayButton from "../UI/PlayButton";
 import TagList from "../UI/TagList";
+import TimeLinePlayed from "../UI/TimeLinePlayed";
 import ViewDescription from "../UI/ViewDescription";
 interface BannerProps {
   data: HomeSection;
@@ -42,7 +43,6 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
   const dataFavorite: Favorite = {
     id: detailMovie.id,
     coverHorizontalUrl: detailMovie.coverHorizontalUrl,
-    coverVerticalUrl: detailMovie.coverVerticalUrl,
     createdAt: new Date().valueOf(),
     name: detailMovie.name,
   };
@@ -99,6 +99,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
           </Button>
           <AddFavorite favorite={dataFavorite} />
         </div>
+        <TimeLinePlayed movieId={detailMovie.id} />
         <div>
           <TagList tagList={detailMovie.tagList} />
         </div>
