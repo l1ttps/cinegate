@@ -3,7 +3,7 @@ import { Movie } from "../../shared/types";
 
 const getDetailMovie = async (id: number, category: number): Promise<Movie> =>
   (
-    await api.get(apiResource.detailFilm, {
+    await api.get(apiResource.detailMovie, {
       params: {
         id,
         category,

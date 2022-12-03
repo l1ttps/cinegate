@@ -14,7 +14,8 @@ api.interceptors.request.use((config) => {
 
 const apiResource = {
   home: "homePage/getHome",
-  detailFilm: "movieDrama/get",
+  detailMovie: "movieDrama/get",
+  resourceMovie: "media/previewInfo",
 };
 
 export { apiResource };

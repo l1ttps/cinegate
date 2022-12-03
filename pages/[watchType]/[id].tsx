@@ -1,14 +1,18 @@
-import { GetServerSideProps, NextPage } from "next";
+import { NextPage } from "next";
 import Head from "next/head";
-import ReactPlayer from "react-player";
-import getDetailMovie from "../../api/services/getDetailMovie";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Layout from "../../components/Layout";
 import AddFavorite from "../../components/UI/AddFavorite";
+import BackdropLoading from "../../components/UI/BackdropLoading";
+import MediaPlayer from "../../components/UI/MediaPlayer";
 import MoreLikeThis from "../../components/UI/MoreLikeThis";
 import TagList from "../../components/UI/TagList";
 import ViewDescription from "../../components/UI/ViewDescription";
 import ViewVote from "../../components/UI/ViewVote";
 import ViewYear from "../../components/UI/ViewYear";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { fetchDetailMovie } from "../../redux/slices/detailMovie";
 import { Favorite, Movie, WatchType } from "../../shared/types";
 interface WatchViewProps {
   watchType: WatchType.TV | WatchType.MOVIE;
@@ -17,7 +21,22 @@ interface WatchViewProps {
 }
 
 const WatchView: NextPage<WatchViewProps> = (props) => {
-  const { movie } = props;
+  const router = useRouter();
+  const { id, watchType } = router.query;
+  const episodeId = 0;
+  const dispatch = useAppDispatch();
+  const detailMovie = useAppSelector((store) => store.detailMovie);
+  const movie = detailMovie.data;
+  const category = watchType === WatchType.TV ? 1 : 0;
+  useEffect(() => {
+    !movie &&
+      dispatch(fetchDetailMovie({ id: parseInt(id as string), category }));
+  }, [category, dispatch, id, movie, watchType]);
+
+  if (!movie) {
+    return <BackdropLoading />;
+  }
+
   const dataFavorite: Favorite = {
     id: movie.id,
     coverHorizontalUrl: movie.coverHorizontalUrl,
@@ -25,20 +44,19 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
     createdAt: new Date().valueOf(),
     name: movie.name,
   };
+
   return (
     <>
       <Head>
         <title>{movie.name}</title>
       </Head>
       <Layout>
-        <div className="grid grid-cols-2 gap-3 ">
-          <div className="flex flex-col col-span-1 gap-3">
-            <ReactPlayer
-              width={"100%"}
-              controls
-              playing
-              className=""
-              url="http://akm-cdn-play.loklok.tv/597bc81948884d2f8da0277cfbcde0fb/07f8365b5c0d4606a58c2afb62e7153e-5590187641bb0fdeb9c71cb6c97501b5-sd.m3u8?hdnts=exp=1669925309-acl=/*-hmac=4c5c1d83ee684e83fcf548d842528c8a9fd7289e893b4120578bf5a4ab601f7f"
+        <div className="grid grid-cols-4 gap-3 ">
+          <div className="flex flex-col col-span-3 gap-3">
+            <MediaPlayer
+              category={category}
+              id={movie.id}
+              episode={movie.episodeVo[episodeId]}
             />
             <div className="flex items-center justify-between w-full">
               <span className="text-2xl font-bold">{movie.name}</span>
@@ -51,27 +69,11 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
             <ViewDescription text={movie.introduction} />
             <TagList tagList={movie.tagList} />
           </div>
-          <div className="py-4">
-            <MoreLikeThis likeList={movie.likeList} />
-          </div>
+          <MoreLikeThis forceGridCol likeList={movie.likeList} />
         </div>
       </Layout>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const watchType = ctx?.params?.watchType;
-  const id = +(ctx?.params?.id || 1);
-  const category = watchType === WatchType.TV ? 1 : 0;
-  const movie = await getDetailMovie(id, category);
-  const props = {
-    watchType,
-    id,
-    movie,
-  };
-  return {
-    props,
-  };
-};
 export default WatchView;

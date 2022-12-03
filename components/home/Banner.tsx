@@ -20,7 +20,7 @@ interface BannerProps {
 const Banner: FunctionComponent<BannerProps> = (props) => {
   const dispatch = useAppDispatch();
   const { data } = props;
-  const top = 3;
+  const top = 1;
   const filmBanner = data.recommendContentVOList[top - 1];
   // const detailMovie = useAppSelector((store) => store.detailMovie);
   const [detailMovie, setDetailMovie] = useState<Movie>();

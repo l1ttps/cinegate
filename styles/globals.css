@@ -58,7 +58,22 @@ img {
   top: 0;
   left: 0;
 }
+
 .img-fade {
   -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.player-wrapper {
+  position: relative;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
