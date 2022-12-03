@@ -94,7 +94,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
           <Button onClick={handleClickDetailMovie} variant="secondary">
             <div className="flex items-center">
               <InformationCircleIcon className="mr-1" width={30} />
-              <span>View detail</span>
+              <span>Detail</span>
             </div>
           </Button>
           <AddFavorite favorite={dataFavorite} />

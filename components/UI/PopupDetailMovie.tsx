@@ -5,6 +5,7 @@ import { closePopupDetailMovie } from "../../redux/slices/detailMovie";
 import { Favorite } from "../../shared/types";
 import AddFavorite from "./AddFavorite";
 import BackdropLoading from "./BackdropLoading";
+import Episodes from "./Episodes";
 import MoreLikeThis from "./MoreLikeThis";
 import PlayButton from "./PlayButton";
 import TagList from "./TagList";
@@ -91,6 +92,7 @@ const Modal = (props: IProps) => {
           </div>
           <ViewDescription text={movie.introduction} />
           <TagList tagList={movie.tagList} />
+          <Episodes movie={movie} />
           <MoreLikeThis likeList={movie.likeList} />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import getResourceMovie from "../../api/services/getResourceMovie";
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { updateHistory } from "../../redux/slices/history";
 import { Movie, ResourceMovie, TypeResource } from "../../shared/types";
 
@@ -13,16 +13,18 @@ interface MediaPlayerProps {
 }
 
 const MediaPlayer: FC<MediaPlayerProps> = (props) => {
+  const player: any = useRef();
   const { episodeId, movie } = props;
   const dispatch = useAppDispatch();
-  const episode = movie.episodeVo[episodeId];
+  const episode = movie.episodeVo[episodeId - 1];
 
-  const coverHorizontalUrl = movie.coverHorizontalUrl;
+  const history = useAppSelector((store) => store.history.entities[movie.id]);
+
+  const timeToStart = useRef(history?.currentTime) || 0;
+
   const [movieResource, setMovieResource] = useState<ResourceMovie[]>(
     [] as any
   );
-
-  const player: any = useRef();
 
   useEffect(() => {
     (async () => {
@@ -38,10 +40,31 @@ const MediaPlayer: FC<MediaPlayerProps> = (props) => {
       ).then((res) => res.filter((data) => data));
       setMovieResource(_movieResource);
     })();
-  }, [episode.definitionList, episode.id, movie.category, movie.id]);
+  }, [
+    episode.definitionList,
+    episode.id,
+    movie.category,
+    movie.id,
+    timeToStart,
+  ]);
+
+  useEffect(() => {
+    // auto seek
+    setTimeout(() => {
+      player.current && player.current.seekTo(timeToStart.current, "seconds");
+    }, 1000);
+  }, [timeToStart]);
 
   if (movieResource.length === 0) {
-    return <></>;
+    return (
+      <picture>
+        <img
+          src={movie.coverHorizontalUrl}
+          alt={movie.name}
+          className="w-full h-full"
+        />
+      </picture>
+    );
   }
 
   const handleUpdateHistory = (event) => {
@@ -51,6 +74,7 @@ const MediaPlayer: FC<MediaPlayerProps> = (props) => {
         changes: {
           currentTime: event.playedSeconds,
           totalTime: movieResource[0].totalDuration,
+          episodeId,
         },
       })
     );
@@ -64,7 +88,7 @@ const MediaPlayer: FC<MediaPlayerProps> = (props) => {
           width={"100%"}
           playing
           height={"100%"}
-          url={movieResource[0].mediaUrl}
+          url={movieResource[0].mediaUrl.replace("http://", "https://")}
           controls
           onProgress={handleUpdateHistory}
         />

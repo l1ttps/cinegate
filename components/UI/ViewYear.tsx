@@ -5,7 +5,7 @@ interface ViewYearProps {
 }
 
 const ViewYear: FC<ViewYearProps> = ({ year }) => {
-  return <div className="px-1 mb-3 border rounded-lg w-fit">{year}</div>;
+  return <div className="px-1 mb-3 border-2 rounded-lg w-fit">{year}</div>;
 };
 
 export default ViewYear;
