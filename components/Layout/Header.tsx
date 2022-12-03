@@ -22,9 +22,9 @@ const Header: FunctionComponent = () => {
     <div
       className={classNames(
         [
-          "fixed flex left-0 right-0 flex-row items-center w-full p-5 px-10 mx-auto text-4xl font-bold uppercase z-[100] h-14",
+          "fixed flex left-0 gap-5 text-shadow right-0 text-lg flex-row items-center w-full p-5 px-10 mx-auto z-[100] h-14",
         ],
-        fillBg && "bg-default shadow-lg"
+        fillBg ? "bg-default shadow-lg" : ""
       )}
     >
       <Link href={"/"}>
@@ -35,6 +35,9 @@ const Header: FunctionComponent = () => {
           loader={() => logo}
           alt="CineGate"
         />
+      </Link>
+      <Link href={"/my-list"}>
+        <span>My list</span>
       </Link>
     </div>
   );

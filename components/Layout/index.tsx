@@ -23,7 +23,7 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
           <div
             className={classnames([
               "h-full contain",
-              withoutPadding ? "p-0" : "container mx-auto pt-12 ",
+              withoutPadding ? "p-0" : "mx-auto container pt-20  ",
             ])}
           >
             {children}

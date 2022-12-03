@@ -2,7 +2,6 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import React, { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { closePopupDetailMovie } from "../../redux/slices/detailMovie";
-import { Favorite } from "../../shared/types";
 import AddFavorite from "./AddFavorite";
 import BackdropLoading from "./BackdropLoading";
 import Episodes from "./Episodes";
@@ -42,13 +41,6 @@ const Modal = (props: IProps) => {
 
   const imagePath = new URL(movie?.coverHorizontalUrl as string);
 
-  const dataFavorite: Favorite = {
-    id: movie.id,
-    coverHorizontalUrl: movie.coverHorizontalUrl,
-    createdAt: new Date().valueOf(),
-    name: movie.name,
-  };
-
   return (
     <div
       onClick={onClose}
@@ -80,7 +72,7 @@ const Modal = (props: IProps) => {
         <div className="flex gap-3 flex-col  top-[60%] px-10 mx-auto">
           <div className="flex items-center gap-3">
             <PlayButton movie={movie} />
-            <AddFavorite favorite={dataFavorite} />
+            <AddFavorite movie={movie} />
           </div>
           <TimeLinePlayed movieId={movie.id} />
           <span className="text-2xl font-bold">{movie.name}</span>

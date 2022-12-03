@@ -15,7 +15,7 @@ import ViewYear from "../../components/UI/ViewYear";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchDetailMovie } from "../../redux/slices/detailMovie";
 import { addHistory } from "../../redux/slices/history";
-import { Favorite, Movie, WatchType } from "../../shared/types";
+import { Movie, WatchType } from "../../shared/types";
 interface WatchViewProps {
   watchType: WatchType.TV | WatchType.MOVIE;
   id: number;
@@ -32,7 +32,7 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
   const category = watchType === WatchType.TV ? 1 : 0;
 
   useEffect(() => {
-    !movie &&
+    ((movie && movie.id !== id) || !movie) &&
       dispatch(fetchDetailMovie({ id: parseInt(id as string), category }));
   }, [category, dispatch, id, movie, watchType]);
 
@@ -41,6 +41,7 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
       dispatch(
         addHistory({
           id: movie.id,
+          category: movie.category,
           coverHorizontalUrl: movie.coverHorizontalUrl,
           createdAt: new Date().valueOf(),
           currentTime: 0,
@@ -61,13 +62,6 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
     return <></>;
   }
 
-  const dataFavorite: Favorite = {
-    id: movie.id,
-    coverHorizontalUrl: movie.coverHorizontalUrl,
-    createdAt: new Date().valueOf(),
-    name: movie.name,
-  };
-
   return (
     <>
       <Head>
@@ -84,7 +78,7 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
             />
             <div className="flex items-center justify-between w-full">
               <span className="text-2xl font-bold">{movie.name}</span>
-              <AddFavorite favorite={dataFavorite} />
+              <AddFavorite movie={movie} />
             </div>
             <div className="flex gap-3">
               <ViewYear year={movie.year} />

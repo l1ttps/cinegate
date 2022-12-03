@@ -1,5 +1,10 @@
 import classNames from "classnames";
 import { FC } from "react";
+import { useAppDispatch } from "../../hooks/redux";
+import {
+  fetchDetailMovie,
+  openPopupDetailMovie,
+} from "../../redux/slices/detailMovie";
 import { LikeList } from "../../shared/types";
 import ViewVote from "./ViewVote";
 import ViewYear from "./ViewYear";
@@ -10,6 +15,14 @@ interface MoreLikeThisProps {
 }
 
 const MoreLikeThis: FC<MoreLikeThisProps> = ({ likeList, forceGridCol }) => {
+  const dispatch = useAppDispatch();
+
+  const handleClickDetailMovie = (detailMovie) => {
+    const { id, category } = detailMovie;
+    dispatch(openPopupDetailMovie());
+    dispatch(fetchDetailMovie({ id: parseInt(id), category }));
+  };
+
   return (
     <div>
       <div className="mb-3 text-2xl font-bold">More like this</div>
@@ -24,6 +37,7 @@ const MoreLikeThis: FC<MoreLikeThisProps> = ({ likeList, forceGridCol }) => {
         {likeList.map((movie) => {
           return (
             <div
+              onClick={() => handleClickDetailMovie(movie)}
               className="rounded-lg shadow-lg cursor-pointer bg-stone-600 hover:bg-stone-800"
               key={movie.id}
             >

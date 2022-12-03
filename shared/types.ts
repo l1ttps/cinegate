@@ -357,6 +357,7 @@ export interface UpdateInfo {
 
 export interface Favorite {
   id: string;
+  category: number;
   coverHorizontalUrl: string;
   name: string;
   createdAt: number;

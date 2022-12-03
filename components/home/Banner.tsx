@@ -6,7 +6,7 @@ import {
   fetchDetailMovie,
   openPopupDetailMovie,
 } from "../../redux/slices/detailMovie";
-import { Favorite, HomeSection, Movie } from "../../shared/types";
+import { HomeSection, Movie } from "../../shared/types";
 import Image from "../common/Image";
 import AddFavorite from "../UI/AddFavorite";
 import Button from "../UI/Button";
@@ -40,12 +40,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
     return <></>;
   }
   const imagePath = new URL(detailMovie?.coverHorizontalUrl as string);
-  const dataFavorite: Favorite = {
-    id: detailMovie.id,
-    coverHorizontalUrl: detailMovie.coverHorizontalUrl,
-    createdAt: new Date().valueOf(),
-    name: detailMovie.name,
-  };
+
   const handleClickDetailMovie = () => {
     const { id, category } = detailMovie;
     dispatch(openPopupDetailMovie());
@@ -97,7 +92,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
               <span>Detail</span>
             </div>
           </Button>
-          <AddFavorite favorite={dataFavorite} />
+          <AddFavorite movie={detailMovie} />
         </div>
         <TimeLinePlayed movieId={detailMovie.id} />
         <div>
