@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     <Layout withoutPadding>
       <>
         <Banner data={homeSelection.data[0]} />
-        <div className="flex flex-col absolute left-0 right-0 top-[78%] z-[30]">
+        <div className="flex flex-col pb-5 gap-20 absolute left-0 right-0 top-[78%] z-[30]">
           {homeSelection.data.map((list) => (
             <CategorySlide
               key={list.refId}

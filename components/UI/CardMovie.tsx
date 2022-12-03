@@ -24,7 +24,7 @@ const CardMovie: FunctionComponent<CardMovieProps> = (props) => {
     <div className="rounded-lg group">
       <Image
         onClick={handleClickDetailMovie}
-        className="rounded-lg cursor-pointer hover:opacity-1"
+        className="rounded-lg cursor-pointer hover:img-fade"
         height={246}
         width={175}
         src={movie.imageUrl}

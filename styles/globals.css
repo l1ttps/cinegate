@@ -30,29 +30,6 @@ a {
   text-shadow: 1px 1px black;
 }
 
-.netflix-slider .swiper-wrapper {
-  padding: 30px 0;
-}
-
-.netflix-slider .swiper-slide {
-  -webkit-transition: 250ms all;
-  transition: 250ms all;
-}
-
-.netflix-slider .swiper-slide:hover {
-  -webkit-transform: scale(1.5);
-  transform: scale(1.5);
-  z-index: 1;
-}
-
-.netflix-slider .swiper-slide:first-child:hover {
-  margin: 0 80px;
-}
-
-.netflix-slider .swiper-slide:last-child:hover {
-  margin: 0 -40px;
-}
-
 div,
 img {
   top: 0;

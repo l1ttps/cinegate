@@ -68,8 +68,8 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
         <title>{movie.name}</title>
       </Head>
       <Layout>
-        <div className="grid grid-cols-4 gap-5 p-5">
-          <div className="flex flex-col col-span-3 gap-3">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
+          <div className="flex flex-col gap-3 md:col-span-3">
             <MediaPlayer
               episodeId={episodeId}
               movie={movie}
@@ -96,9 +96,7 @@ const WatchView: NextPage<WatchViewProps> = (props) => {
             <TagList tagList={movie.tagList} />
             <Episodes movie={movie} />
           </div>
-          <div className="col-span-1">
-            <MoreLikeThis forceGridCol likeList={movie.likeList} />
-          </div>
+          <MoreLikeThis forceGridCol likeList={movie.likeList} />
         </div>
       </Layout>
     </>

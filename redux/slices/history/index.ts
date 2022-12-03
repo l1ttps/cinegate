@@ -3,7 +3,7 @@ import { History } from "../../../shared/types";
 
 const historyAdapter = createEntityAdapter<History>({
   selectId: (history) => history.id,
-  sortComparer: (a, b) => a.createdAt - b.createdAt,
+  sortComparer: (a, b) => b.createdAt - a.createdAt,
 });
 
 const historySlice = createSlice({

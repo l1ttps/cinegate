@@ -9,6 +9,7 @@ import {
 import { HomeSection, Movie } from "../../shared/types";
 import Image from "../common/Image";
 import AddFavorite from "../UI/AddFavorite";
+import BackdropLoading from "../UI/BackdropLoading";
 import Button from "../UI/Button";
 import PlayButton from "../UI/PlayButton";
 import TagList from "../UI/TagList";
@@ -37,7 +38,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
   }, [dispatch, filmBanner]);
 
   if (!detailMovie) {
-    return <></>;
+    return <BackdropLoading />;
   }
   const imagePath = new URL(detailMovie?.coverHorizontalUrl as string);
 
@@ -53,7 +54,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
         // backgroundImage: `url(${imagePath.href})`,
         backgroundSize: "100% 100%",
       }}
-      className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-10"
+      className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-2 md:px-10"
     >
       <div className="absolute top-0 bottom-0 left-0 right-0 z-10 img-fade">
         <Image
@@ -82,7 +83,9 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
             #{top} in {filmBanner.contentType}
           </div>
         </div>
-        <div className="text-5xl text-shadow">{filmBanner.title}</div>
+        <div className="text-2xl md:text-3xl lg:text-5xl text-shadow">
+          {filmBanner.title}
+        </div>
         <ViewDescription text={detailMovie?.introduction.split(".")[0]} />
         <div className="flex items-center gap-3">
           <PlayButton movie={detailMovie} />

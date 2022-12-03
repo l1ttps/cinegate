@@ -52,7 +52,7 @@ const Modal = (props: IProps) => {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="relative flex flex-col w-5/6 pb-10 border-0 rounded-lg shadow-lg cursor-default h-fit lg:w-1/2 md:w-2/3 bg-default"
+        className="relative flex flex-col w-full pb-10 border-0 rounded-lg shadow-lg cursor-default h-fit lg:w-1/2 md:w-2/3 bg-default"
       >
         <button
           className="absolute z-10 float-right p-1 text-black rounded-full top-5 right-5 bg-stone-900"
@@ -63,13 +63,13 @@ const Modal = (props: IProps) => {
         <div className="w-full img-fade">
           <picture>
             <img
-              className="hidden md:inline-block z-1 rounded-xl"
+              className="w-full z-1 rounded-xl"
               src={imagePath.href}
               alt={movie?.name as string}
             />
           </picture>
         </div>
-        <div className="flex gap-3 flex-col  top-[60%] px-10 mx-auto">
+        <div className="flex gap-3 flex-col  top-[60%] px-2 md:px-10 mx-auto">
           <div className="flex items-center gap-3">
             <PlayButton movie={movie} />
             <AddFavorite movie={movie} />

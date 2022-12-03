@@ -8,10 +8,11 @@ import {
   openPopupDetailMovie,
 } from "../../redux/slices/detailMovie";
 import { removeFavorite } from "../../redux/slices/favoriteList";
+import { removeHistory } from "../../redux/slices/history";
 import { Favorite } from "../../shared/types";
 
-const MyList: NextPage = () => {
-  const favoriteList = useAppSelector((store) => store.favoriteList);
+const History: NextPage = () => {
+  const history = useAppSelector((store) => store.history);
   const dispatch = useAppDispatch();
   const handleClickDetailMovie = (movie: Favorite) => {
     const { id, category } = movie;
@@ -23,16 +24,16 @@ const MyList: NextPage = () => {
     dispatch(removeFavorite(id));
   };
 
-  const handleRemoveFavorite = (e, id) => {
+  const handleRemoveHistory = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
-    dispatch(removeFavorite(id));
+    dispatch(removeHistory(id));
   };
   return (
-    <Layout title="My list">
+    <Layout title="History">
       <div className="grid grid-cols-1 gap-5 my-5 md:grid-cols-2 lg:grid-cols-5">
-        {favoriteList.ids.map((movieId) => {
-          const movie = favoriteList.entities[movieId];
+        {history.ids.map((movieId) => {
+          const movie = history.entities[movieId];
           return (
             movie && (
               <div
@@ -40,7 +41,10 @@ const MyList: NextPage = () => {
                 className="rounded-lg cursor-pointer group bg-stone-800 hover:bg-stone-700"
                 key={movieId}
               >
-                <div className="mb-3">
+                <div className="relative mb-3">
+                  <div className="absolute right-0 h-5 px-2 py-3 bg-red-500 rounded-br-lg w-fit center">
+                    {movie.episodeId}
+                  </div>
                   <picture>
                     <img
                       className="rounded-lg rounded-b-none"
@@ -59,9 +63,9 @@ const MyList: NextPage = () => {
                     {movie?.name}
                   </div>
                   <div
-                    onClick={(e) => handleRemoveFavorite(e, movie.id)}
+                    onClick={(e) => handleRemoveHistory(e, movie.id)}
                     className="w-8 h-8 p-1 border-2 rounded-full cursor-pointer center hover:bg-stone-600 "
-                    title={`Remove favorite`}
+                    title={`Remove`}
                   >
                     <XMarkIcon width={30} color="white" />
                   </div>
@@ -75,4 +79,4 @@ const MyList: NextPage = () => {
   );
 };
 
-export default MyList;
+export default History;
