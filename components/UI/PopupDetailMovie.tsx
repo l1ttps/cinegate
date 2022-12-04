@@ -39,8 +39,6 @@ const Modal = (props: IProps) => {
     return <></>;
   }
 
-  console.log(detailMovie);
-
   const imagePath = new URL(movie?.coverHorizontalUrl as string);
 
   return (

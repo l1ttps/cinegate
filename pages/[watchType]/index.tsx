@@ -5,8 +5,6 @@ interface WatchProps {
   watchType: "TV" | "Movie";
 }
 const Watch: NextPage<WatchProps> = (props) => {
-  console.log(props);
-
   return (
     <Layout>
       <>{props.watchType}</>
