@@ -7,7 +7,7 @@ import {
   openPopupDetailMovie,
 } from "../../redux/slices/detailMovie";
 import { HomeSection, Movie } from "../../shared/types";
-import Image from "../common/Image";
+import Image, { SizeType } from "../common/Image";
 import AddFavorite from "../UI/AddFavorite";
 import BackdropLoading from "../UI/BackdropLoading";
 import Button from "../UI/Button";
@@ -63,8 +63,10 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
           src={imagePath.href}
           alt={filmBanner.title}
           fill={true}
+          sizeType={SizeType.fullSize}
         />
         <Image
+          sizeType={SizeType.fullSize}
           className="flex z-1 md:hidden"
           unoptimized
           src={filmBanner.imageUrl}

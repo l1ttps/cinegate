@@ -5,7 +5,7 @@ import {
   openPopupDetailMovie,
 } from "../../redux/slices/detailMovie";
 import { RecommendContentVOList } from "../../shared/types";
-import Image from "../common/Image";
+import Image, { SizeType } from "../common/Image";
 
 interface CardMovieProps {
   movie: RecommendContentVOList;
@@ -23,6 +23,7 @@ const CardMovie: FunctionComponent<CardMovieProps> = (props) => {
   return (
     <div className="rounded-lg group">
       <Image
+        sizeType={SizeType.cardVertical}
         onClick={handleClickDetailMovie}
         className="rounded-lg cursor-pointer hover:img-fade"
         height={246}

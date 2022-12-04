@@ -1,5 +1,6 @@
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { NextPage } from "next";
+import { getImage, SizeType } from "../../components/common/Image";
 import Layout from "../../components/Layout";
 import TimeLinePlayed from "../../components/UI/TimeLinePlayed";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -48,7 +49,10 @@ const History: NextPage = () => {
                   <picture className="h-42">
                     <img
                       className="w-full rounded-lg rounded-b-none h-42"
-                      src={movie?.coverHorizontalUrl}
+                      src={getImage(
+                        movie?.coverHorizontalUrl,
+                        SizeType.cardHorizontal
+                      )}
                       alt={movie?.name}
                     />
                   </picture>
