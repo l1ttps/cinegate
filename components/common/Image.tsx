@@ -9,7 +9,7 @@ export enum SizeType {
   cardVertical = "?imageView2/1/w/380/h/532/format/webp/interlace/1/ignore-error/1/q/90!/format/webp",
 }
 interface ShowImageProps extends ImageProps {
-  sizeType: SizeType;
+  sizeType?: SizeType;
 }
 
 export const getImage = (url: string, sizeType) => {
