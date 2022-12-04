@@ -13,10 +13,11 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
   const { data, title } = props;
 
   return (
-    <div className="flex flex-col px-2 md:px-10 netflix-slider">
+    <div className="flex flex-col px-2 mb-10 md:px-10 netflix-slider">
       <span className="mb-3 text-2xl font-bold ">{title}</span>
-      <div className="relative flex flex-row swiper-container">
+      <div className="relative flex flex-row">
         <Swiper
+          className="w-full"
           breakpoints={{
             320: {
               slidesPerView: 2,
