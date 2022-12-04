@@ -23,7 +23,7 @@ const HeadSEO = () => {
 
         <meta property="og:url" content="https://cinegate.online" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={"../../public/cinegate.png"} />
+        <meta property="og:image" content={"cinegate.png"} />
         <meta name="twitter:card" content="summary" />
         <meta
           name="og:description"
