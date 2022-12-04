@@ -7,6 +7,7 @@ const HeadSEO = () => {
         CineGate - Watch HD movies online for free - Highest Rated Movies
         Recommendation
       </title>
+      <meta name="theme-color" content="#141414" />
       <meta
         name="og:description"
         content="Popular episodes updated quickly,American hot seriesTension, comedy, thriller,Newest hottest dramasall in CineGate"
@@ -24,6 +25,8 @@ const HeadSEO = () => {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
       />
+
+      <link rel="manifest" href="/manifest.json" />
     </Head>
   );
 };

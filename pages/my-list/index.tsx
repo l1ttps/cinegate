@@ -43,7 +43,7 @@ const MyList: NextPage = () => {
                 <div className="mb-3">
                   <picture>
                     <img
-                      className="rounded-lg rounded-b-none"
+                      className="w-full rounded-lg rounded-b-none h-42"
                       src={movie?.coverHorizontalUrl}
                       alt={movie?.name}
                     />

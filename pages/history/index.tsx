@@ -45,9 +45,9 @@ const History: NextPage = () => {
                   <div className="absolute right-0 h-5 px-2 py-3 bg-red-500 rounded-br-lg w-fit center">
                     {movie.episodeId}
                   </div>
-                  <picture>
+                  <picture className="h-42">
                     <img
-                      className="rounded-lg rounded-b-none"
+                      className="w-full rounded-lg rounded-b-none h-42"
                       src={movie?.coverHorizontalUrl}
                       alt={movie?.name}
                     />
