@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Script from "next/script";
 
 const HeadSEO = () => {
   return (
@@ -32,19 +31,6 @@ const HeadSEO = () => {
         />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-PDQWL0FWDR');
-        `}
-      </Script>
     </div>
   );
 };
