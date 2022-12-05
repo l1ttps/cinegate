@@ -357,13 +357,33 @@ export interface UpdateInfo {
 
 export interface Favorite {
   id: string;
+  category: number;
   coverHorizontalUrl: string;
-  coverVerticalUrl: string;
   name: string;
   createdAt: number;
+}
+
+export interface History extends Favorite {
+  totalTime: number;
+  currentTime: number;
+  episodeId: number;
 }
 
 export enum WatchType {
   TV = "tv",
   MOVIE = "movie",
+}
+
+export enum TypeResource {
+  GROOT_HD = "GROOT_HD",
+  GROOT_SD = "GROOT_SD",
+  GROOT_LD = "GROOT_LD",
+}
+
+export interface ResourceMovie {
+  businessType: number;
+  currentDefinition: string;
+  episodeId: string;
+  mediaUrl: string;
+  totalDuration: number;
 }

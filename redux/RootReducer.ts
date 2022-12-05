@@ -3,7 +3,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import detailMovie from "./slices/detailMovie";
 import favoriteList from "./slices/favoriteList";
-import homeSelection from "./slices/homeSelection";
+import history from "./slices/history";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -12,9 +12,9 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  homeSelection,
   detailMovie,
   favoriteList,
+  history,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

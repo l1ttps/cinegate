@@ -6,12 +6,14 @@ import {
   fetchDetailMovie,
   openPopupDetailMovie,
 } from "../../redux/slices/detailMovie";
-import { Favorite, HomeSection, Movie } from "../../shared/types";
-import Image from "../common/Image";
+import { HomeSection, Movie } from "../../shared/types";
+import Image, { SizeType } from "../common/Image";
 import AddFavorite from "../UI/AddFavorite";
+import BackdropLoading from "../UI/BackdropLoading";
 import Button from "../UI/Button";
 import PlayButton from "../UI/PlayButton";
 import TagList from "../UI/TagList";
+import TimeLinePlayed from "../UI/TimeLinePlayed";
 import ViewDescription from "../UI/ViewDescription";
 interface BannerProps {
   data: HomeSection;
@@ -20,7 +22,7 @@ interface BannerProps {
 const Banner: FunctionComponent<BannerProps> = (props) => {
   const dispatch = useAppDispatch();
   const { data } = props;
-  const top = 3;
+  const top = 1;
   const filmBanner = data.recommendContentVOList[top - 1];
   // const detailMovie = useAppSelector((store) => store.detailMovie);
   const [detailMovie, setDetailMovie] = useState<Movie>();
@@ -36,16 +38,10 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
   }, [dispatch, filmBanner]);
 
   if (!detailMovie) {
-    return <></>;
+    return <BackdropLoading />;
   }
   const imagePath = new URL(detailMovie?.coverHorizontalUrl as string);
-  const dataFavorite: Favorite = {
-    id: detailMovie.id,
-    coverHorizontalUrl: detailMovie.coverHorizontalUrl,
-    coverVerticalUrl: detailMovie.coverVerticalUrl,
-    createdAt: new Date().valueOf(),
-    name: detailMovie.name,
-  };
+
   const handleClickDetailMovie = () => {
     const { id, category } = detailMovie;
     dispatch(openPopupDetailMovie());
@@ -58,7 +54,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
         // backgroundImage: `url(${imagePath.href})`,
         backgroundSize: "100% 100%",
       }}
-      className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-10"
+      className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-2 md:px-10"
     >
       <div className="absolute top-0 bottom-0 left-0 right-0 z-10 img-fade">
         <Image
@@ -67,8 +63,10 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
           src={imagePath.href}
           alt={filmBanner.title}
           fill={true}
+          sizeType={SizeType.fullSize}
         />
         <Image
+          sizeType={SizeType.fullSize}
           className="flex z-1 md:hidden"
           unoptimized
           src={filmBanner.imageUrl}
@@ -87,18 +85,21 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
             #{top} in {filmBanner.contentType}
           </div>
         </div>
-        <div className="text-5xl text-shadow">{filmBanner.title}</div>
+        <div className="text-2xl md:text-3xl lg:text-5xl text-shadow">
+          {filmBanner.title}
+        </div>
         <ViewDescription text={detailMovie?.introduction.split(".")[0]} />
         <div className="flex items-center gap-3">
           <PlayButton movie={detailMovie} />
           <Button onClick={handleClickDetailMovie} variant="secondary">
             <div className="flex items-center">
               <InformationCircleIcon className="mr-1" width={30} />
-              <span>View detail</span>
+              <span>Detail</span>
             </div>
           </Button>
-          <AddFavorite favorite={dataFavorite} />
+          <AddFavorite movie={detailMovie} />
         </div>
+        <TimeLinePlayed movieId={detailMovie.id} />
         <div>
           <TagList tagList={detailMovie.tagList} />
         </div>

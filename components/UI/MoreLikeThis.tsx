@@ -1,21 +1,44 @@
+import classNames from "classnames";
 import { FC } from "react";
+import { useAppDispatch } from "../../hooks/redux";
+import {
+  fetchDetailMovie,
+  openPopupDetailMovie,
+} from "../../redux/slices/detailMovie";
 import { LikeList } from "../../shared/types";
 import ViewVote from "./ViewVote";
 import ViewYear from "./ViewYear";
 
 interface MoreLikeThisProps {
   likeList: LikeList[];
+  forceGridCol?: boolean;
 }
 
-const MoreLikeThis: FC<MoreLikeThisProps> = ({ likeList }) => {
+const MoreLikeThis: FC<MoreLikeThisProps> = ({ likeList, forceGridCol }) => {
+  const dispatch = useAppDispatch();
+
+  const handleClickDetailMovie = (detailMovie) => {
+    const { id, category } = detailMovie;
+    dispatch(openPopupDetailMovie());
+    dispatch(fetchDetailMovie({ id: parseInt(id), category }));
+  };
+
   return (
     <div>
       <div className="mb-3 text-2xl font-bold">More like this</div>
-      <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 ">
+      <div
+        className={classNames([
+          "grid w-full  gap-4 ",
+          forceGridCol
+            ? "grid-cols-1 md:grid-cols-2"
+            : "grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4",
+        ])}
+      >
         {likeList.map((movie) => {
           return (
             <div
-              className="rounded-lg shadow-lg cursor-pointer hover:rounded-lg hover:scale-125 bg-stone-600 hover:bg-stone-700"
+              onClick={() => handleClickDetailMovie(movie)}
+              className="rounded-lg shadow-lg cursor-pointer bg-stone-600 hover:bg-stone-800"
               key={movie.id}
             >
               <picture>
@@ -38,4 +61,7 @@ const MoreLikeThis: FC<MoreLikeThisProps> = ({ likeList }) => {
   );
 };
 
+MoreLikeThis.defaultProps = {
+  forceGridCol: false,
+};
 export default MoreLikeThis;
