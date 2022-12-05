@@ -32,7 +32,7 @@ const SearchBar: FC = () => {
     dispatch(onChangeTextSearch(""));
   };
   return (
-    <div className="relative flex items-center cursor-pointer">
+    <div className="relative items-center hidden cursor-pointer md:flex">
       {search.isFocused ? (
         <div className="w-[400px] h-10 flex rounded-lg  bg-stone-800 px-2 py-1 border border-stone-900">
           <MagnifyingGlassIcon
