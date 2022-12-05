@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import detailMovie from "./slices/detailMovie";
 import favoriteList from "./slices/favoriteList";
 import history from "./slices/history";
+import search from "./slices/search";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   detailMovie,
   favoriteList,
   history,
+  search,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

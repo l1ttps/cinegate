@@ -43,7 +43,7 @@ const History: NextPage = () => {
                 key={movieId}
               >
                 <div className="relative mb-3">
-                  <div className="absolute right-0 h-5 px-2 py-3 bg-red-500 rounded-br-lg w-fit center">
+                  <div className="absolute right-0 h-5 px-2 py-3 font-bold bg-red-500 rounded-tl-lg rounded-br-lg w-fit center">
                     {movie.episodeId}
                   </div>
                   <picture className="h-42">
