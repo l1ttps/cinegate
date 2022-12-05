@@ -387,3 +387,40 @@ export interface ResourceMovie {
   mediaUrl: string;
   totalDuration: number;
 }
+
+export interface SearchResult extends RecommendContentVOList {
+  areas: Area[];
+  categoryTag: CategoryTag[];
+  coverHorizontalUrl: string;
+  coverVerticalUrl: string;
+  domainType: number;
+  dramaType: DramaType;
+  duration: string;
+  name: string;
+  releaseTime: string;
+  sort: string;
+  upInfo: UpInfo;
+}
+
+export interface Area {
+  id: number;
+  name: string;
+}
+
+export interface CategoryTag {
+  id: number;
+  name: string;
+}
+
+export interface DramaType {
+  code: string;
+  name: string;
+}
+
+export interface UpInfo {
+  enable: boolean;
+  upId: number;
+  upImgUrl: string;
+  upName: string;
+  userId: any;
+}

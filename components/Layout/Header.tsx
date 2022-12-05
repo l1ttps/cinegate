@@ -40,12 +40,12 @@ const Header: FunctionComponent = () => {
       id=""
       className={classNames(
         [
-          "fixed flex left-0  gap-5 text-shadow right-0 text-lg flex-row items-center w-full md:p-5 md:px-10 mx-auto z-[100] justify-between h-14",
+          "fixed flex left-0  gap-2 text-shadow right-0 text-lg flex-row items-center w-full md:p-5 md:px-10 mx-auto z-[100] justify-between h-14",
         ],
         fillBg ? "bg-default shadow-xl border-b border-stone-800" : ""
       )}
     >
-      <div className="flex items-center gap-4 z-[100] ">
+      <div className="flex items-center gap-2 z-[100] ">
         <Link href={"/"}>
           <Image
             width={150}

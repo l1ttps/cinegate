@@ -7,11 +7,11 @@ import {
 import { RecommendContentVOList } from "../../shared/types";
 import Image, { SizeType } from "../common/Image";
 
-interface CardMovieProps {
+interface CardSwiperProps {
   movie: RecommendContentVOList;
 }
 
-const CardMovie: FunctionComponent<CardMovieProps> = (props) => {
+const CardSwiper: FunctionComponent<CardSwiperProps> = (props) => {
   const { movie } = props;
   const dispatch = useAppDispatch();
 
@@ -38,4 +38,4 @@ const CardMovie: FunctionComponent<CardMovieProps> = (props) => {
   );
 };
 
-export default CardMovie;
+export default CardSwiper;

@@ -3,7 +3,7 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import breakpointsSwiper from "../../config/breakpointsSwiper";
 import { RecommendContentVOList } from "../../shared/types";
-import CardMovie from "./CardMovie";
+import CardSwiper from "./CardSwiper";
 
 interface CategorySlideProps {
   data: RecommendContentVOList[];
@@ -30,7 +30,7 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
         >
           {data.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <CardMovie movie={movie} />
+              <CardSwiper movie={movie} />
             </SwiperSlide>
           ))}
         </Swiper>

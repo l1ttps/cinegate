@@ -17,6 +17,7 @@ const apiResource = {
   detailMovie: "movieDrama/get",
   resourceMovie: "media/previewInfo",
   searchSuggestions: "search/searchLenovo",
+  searchWithKeyWord: "search/v1/searchWithKeyWord",
 };
 
 export { apiResource };

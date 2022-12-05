@@ -174,7 +174,8 @@ const MediaPlayer: FC<MediaPlayerProps> = (props) => {
     try {
       // auto seek
       setTimeout(() => {
-        player?.current &&
+        timeToStart.current &&
+          player?.current &&
           player?.current?.seekTo(timeToStart.current!!, "seconds");
       }, 1000);
     } catch (error) {

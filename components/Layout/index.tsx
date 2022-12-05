@@ -25,7 +25,7 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
           <div
             className={classnames([
               "h-full contain",
-              withoutPadding ? "p-0" : "mx-auto container pt-20 px-2  ",
+              withoutPadding ? "p-0" : "mx-auto container pt-20 px-2",
             ])}
           >
             <span className="text-2xl">{title}</span>

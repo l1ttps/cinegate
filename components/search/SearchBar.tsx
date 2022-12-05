@@ -1,9 +1,8 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import debounce from "lodash.debounce";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useCallback, useState } from "react";
-import searchSuggestions from "../../api/services/searchSuggestions";
+import { searchSuggestions } from "../../api/services/search";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   focusInSearchBar,
@@ -22,7 +21,6 @@ const SearchBar: FC = () => {
 
   const handleFocusOutSearchBar = () => {
     dispatch(focusOutSearchBar());
-    // dispatch(onChangeTextSearch(""));
   };
 
   const handleOnChangeText = ({ target: { value } }) => {
@@ -41,35 +39,44 @@ const SearchBar: FC = () => {
     });
   }
 
+  const handleClickToSearch = (text: string, e) => {
+    e.stopPropagation();
+    router.push(`search?q=${text.replace("<em>", "").replace("</em>", "")}`);
+    handleFocusOutSearchBar();
+    dispatch(onChangeTextSearch(""));
+  };
   return (
-    <div className="relative items-center hidden cursor-pointer md:flex">
+    <div className="flex items-center px-2 mx-2 cursor-pointer">
       {search.isFocused ? (
-        <div className="w-[25rem] h-[3rem] flex rounded-lg bg-stone-800 px-2 py-1">
-          <MagnifyingGlassIcon
-            onClick={handleFocusOutSearchBar}
-            color="white"
-            width={30}
-          />
-          <input
-            placeholder="Search"
-            value={search.query}
-            onChange={handleOnChangeText}
-            autoFocus
-            // onBlur={handleFocusOutSearchBar}
-            className="w-full px-3 outline-none bg-stone-800"
-          />
+        <div className="fixed left-0 right-0 md:relative z-[101] top-0  w-full lg:w-[25rem] h-[3rem] flex rounded-none md:rounded-lg bg-stone-800 px-2 py-1">
+          <div className="flex flex-row items-center flex-1">
+            <MagnifyingGlassIcon
+              onClick={handleFocusOutSearchBar}
+              color="white"
+              width={30}
+            />
+            <input
+              placeholder="Search"
+              value={search.query}
+              onChange={handleOnChangeText}
+              autoFocus
+              // onBlur={() => setTimeout(() => handleFocusOutSearchBar(), 500)}
+              className="w-full px-3 outline-none bg-stone-800"
+            />
+          </div>
+          <div onClick={handleFocusOutSearchBar} className="flex items-center">
+            Cancel
+          </div>
           {search.query.length > 0 && result.length > 0 && (
-            <div className="absolute flex flex-col bg-stone-800 rounded-lg top-[4rem] max-h-[25rem] overflow-scroll w-full">
+            <div className="absolute flex flex-col bg-stone-800 rounded-none md:rounded-lg top-[3rem] md:top-[4rem] max-h-[25rem] overflow-scroll w-full">
               {result.map((text) => (
-                <Link
-                  href={`search?q=${text
-                    .replace("<em>", "")
-                    .replace("</em>", "")}`}
+                <div
+                  onClick={(e) => handleClickToSearch(text, e)}
                   key={text}
                   className="w-full p-2 px-4 hover:bg-stone-700"
                 >
                   <span dangerouslySetInnerHTML={{ __html: text }} />
-                </Link>
+                </div>
               ))}
             </div>
           )}
