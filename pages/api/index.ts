@@ -1,13 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
+import getHomeSelection from "../../api/services/getHomeSelection";
+import { HomeSection } from "../../shared/types";
 
-type Data = {
-  name: string
-}
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<HomeSection[]>
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  const homeData = await getHomeSelection();
+  res.status(200).json(homeData);
 }
