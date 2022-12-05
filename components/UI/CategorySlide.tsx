@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import breakpointsSwiper from "../../config/breakpointsSwiper";
 import { RecommendContentVOList } from "../../shared/types";
 import CardMovie from "./CardMovie";
 
@@ -18,32 +19,7 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
       <div className="relative flex flex-row">
         <Swiper
           className="w-full"
-          breakpoints={{
-            320: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            640: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-            1000: {
-              slidesPerView: 6,
-              spaceBetween: 40,
-            },
-            1500: {
-              slidesPerView: 8,
-              spaceBetween: 50,
-            },
-            2000: {
-              slidesPerView: 10,
-              spaceBetween: 50,
-            },
-          }}
+          breakpoints={breakpointsSwiper}
           pagination={{
             clickable: true,
           }}
