@@ -30,7 +30,7 @@ const MoreLikeThis: FC<MoreLikeThisProps> = ({ likeList, forceGridCol }) => {
         className={classNames([
           "grid w-full  gap-4 ",
           forceGridCol
-            ? "grid-cols-1 md:grid-cols-2"
+            ? "grid-cols-1 xl:grid-cols-2"
             : "grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4",
         ])}
       >

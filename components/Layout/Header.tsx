@@ -61,7 +61,10 @@ const Header: FunctionComponent = () => {
               <Link href={item.path} key={item.path}>
                 <span
                   className={classNames([
-                    route.pathname === item.path ? "font-bold shadow" : "",
+                    route.pathname === item.path
+                      ? "shadow border-b-2 border-red-500"
+                      : "",
+                    "p-1",
                   ])}
                 >
                   {item.label}

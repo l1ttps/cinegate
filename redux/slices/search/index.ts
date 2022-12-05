@@ -3,9 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 interface Search {
   query: string;
   isFocused: boolean;
+  searchRecent: string[];
 }
 
-const initialState: Search = { query: "", isFocused: false };
+const initialState: Search = { query: "", isFocused: false, searchRecent: [] };
 const searchSlice = createSlice({
   name: "search",
   initialState,

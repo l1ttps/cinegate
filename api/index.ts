@@ -16,6 +16,7 @@ const apiResource = {
   home: "homePage/getHome",
   detailMovie: "movieDrama/get",
   resourceMovie: "media/previewInfo",
+  searchSuggestions: "search/searchLenovo",
 };
 
 export { apiResource };
