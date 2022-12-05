@@ -1,7 +1,8 @@
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { closePopupDetailMovie } from "../../redux/slices/detailMovie";
+import { getImage, SizeType } from "../common/Image";
 import AddFavorite from "./AddFavorite";
 import BackdropLoading from "./BackdropLoading";
 import Episodes from "./Episodes";
@@ -21,6 +22,7 @@ interface IProps {
 
 const Modal = (props: IProps) => {
   const ref = useRef();
+  const [isLoadingImage, setIsLoadingImage] = useState(false);
   const detailMovie = useAppSelector((store) => store.detailMovie);
   const dispatch = useAppDispatch();
   const movie = detailMovie.data;
@@ -29,15 +31,13 @@ const Modal = (props: IProps) => {
     dispatch(closePopupDetailMovie());
   };
 
-  if (detailMovie.loading) {
+  if (detailMovie.loading || isLoadingImage) {
     return <BackdropLoading />;
   }
 
   if (!movie) {
     return <></>;
   }
-
-  console.log(detailMovie);
 
   const imagePath = new URL(movie?.coverHorizontalUrl as string);
 
@@ -60,11 +60,13 @@ const Modal = (props: IProps) => {
         >
           <XMarkIcon color="white" className="w-6" />
         </button>
-        <div className="w-full img-fade">
+        <div className="w-full z-1 img-fade">
           <picture>
             <img
+              onLoad={() => setIsLoadingImage(false)}
+              onLoadStart={() => setIsLoadingImage(true)}
               className="w-full z-1 rounded-xl"
-              src={imagePath.href}
+              src={getImage(imagePath.href, SizeType.fullSize)}
               alt={movie?.name as string}
             />
           </picture>

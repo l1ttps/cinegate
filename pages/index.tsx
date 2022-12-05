@@ -6,13 +6,12 @@ import Banner from "../components/home/Banner";
 import Layout from "../components/Layout";
 import CategorySlide from "../components/UI/CategorySlide";
 import Loading from "../components/UI/Loading";
-import Splash from "../components/UI/Splash";
 import { HomeSection } from "../shared/types";
 const Home: NextPage = () => {
   const [page, setPage] = useState(0);
   const [homeSelection, setHomeSelection] = useState<HomeSection[]>([]);
   const [hasMore, setHasMore] = useState(true);
-  console.log(homeSelection);
+  
 
   const fetchData = async (page) => {
     const response = await getHomeSelection(page);
@@ -31,7 +30,7 @@ const Home: NextPage = () => {
   }, []);
 
   if (homeSelection.length === 0) {
-    return <Splash />;
+    return <></>;
   }
 
   return (

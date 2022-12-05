@@ -1,9 +1,11 @@
 {
-    "cSpell.words": [
-        "Favorited",
-        "heroicons",
-        "persistor",
-        "swiper",
-        "unoptimized"
-    ]
+  "cSpell.words": [
+    "Favorited",
+    "heroicons",
+    "persistor",
+    "swiper",
+    "unoptimized"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

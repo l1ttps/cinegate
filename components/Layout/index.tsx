@@ -28,7 +28,7 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
               withoutPadding ? "p-0" : "mx-auto container pt-20 px-2  ",
             ])}
           >
-            <span className="text-4xl">{title}</span>
+            <span className="text-2xl">{title}</span>
             {children}
           </div>
         </Suspense>
