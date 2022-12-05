@@ -1,7 +1,6 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import screenfull from "screenfull";
-import { findDOMNode } from "react-dom";
 
 import getResourceMovie from "../../api/services/getResourceMovie";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -175,7 +174,8 @@ const MediaPlayer: FC<MediaPlayerProps> = (props) => {
     try {
       // auto seek
       setTimeout(() => {
-        player?.current?.seekTo(timeToStart.current!!, "seconds");
+        player?.current &&
+          player?.current?.seekTo(timeToStart.current!!, "seconds");
       }, 1000);
     } catch (error) {
       console.log(error);

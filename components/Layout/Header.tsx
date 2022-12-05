@@ -6,7 +6,7 @@ import { FunctionComponent, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { useAppSelector } from "../../hooks/redux";
 import SearchBar from "../search/SearchBar";
-const HEIGHT = 200;
+const HEIGHT = 50;
 
 const Header: FunctionComponent = () => {
   const store = useAppSelector((store) => store);
@@ -37,14 +37,15 @@ const Header: FunctionComponent = () => {
 
   return (
     <div
+      id=""
       className={classNames(
         [
           "fixed flex left-0  gap-5 text-shadow right-0 text-lg flex-row items-center w-full md:p-5 md:px-10 mx-auto z-[100] justify-between h-14",
         ],
-        fillBg ? "bg-default shadow-lg" : ""
+        fillBg ? "bg-default shadow-xl border-b border-stone-800" : ""
       )}
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 z-[100] ">
         <Link href={"/"}>
           <Image
             width={150}

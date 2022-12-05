@@ -56,7 +56,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
       }}
       className="h-[100%] bg-no-repeat  relative w-full flex flex-col justify-center px-2 md:px-10"
     >
-      <div className="absolute top-0 bottom-0 left-0 right-0 z-10 img-fade">
+      <div className="absolute top-0 bottom-0 left-0 right-0 z-10 bg-gradient-to-r from-black via-stone-800 to-black opacity-95 img-fade">
         <Image
           className="hidden md:inline-block z-1"
           unoptimized
