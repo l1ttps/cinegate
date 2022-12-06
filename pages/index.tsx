@@ -11,7 +11,6 @@ const Home: NextPage = () => {
   const [page, setPage] = useState(0);
   const [homeSelection, setHomeSelection] = useState<HomeSection[]>([]);
   const [hasMore, setHasMore] = useState(true);
-  
 
   const fetchData = async (page) => {
     const response = await getHomeSelection(page);
@@ -36,7 +35,9 @@ const Home: NextPage = () => {
   return (
     <Layout withoutPadding>
       <>
-        <Banner data={homeSelection[0]} />
+        <Banner
+          recommendContentVOList={homeSelection[0].recommendContentVOList}
+        />
         <div className="flex flex-col pb-5 gap-20 absolute left-0 right-0 top-[78%] z-[30]">
           <InfiniteScroll
             dataLength={homeSelection.length}

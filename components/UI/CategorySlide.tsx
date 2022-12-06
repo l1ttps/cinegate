@@ -1,10 +1,10 @@
-import { FunctionComponent } from "react";
+import { shuffle } from "lodash";
+import { FunctionComponent, memo } from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import breakpointsSwiper from "../../config/breakpointsSwiper";
 import { RecommendContentVOList } from "../../shared/types";
 import CardSwiper from "./CardSwiper";
-
 interface CategorySlideProps {
   data: RecommendContentVOList[];
   title: string;
@@ -28,7 +28,7 @@ const CategorySlide: FunctionComponent<CategorySlideProps> = (props) => {
           // className="swiper-wrapper"
           loop={false}
         >
-          {data.map((movie) => (
+          {shuffle(data).map((movie) => (
             <SwiperSlide key={movie.id}>
               <CardSwiper movie={movie} />
             </SwiperSlide>
@@ -43,4 +43,4 @@ CategorySlide.defaultProps = {
   data: [],
   title: "Untitled",
 };
-export default CategorySlide;
+export default memo(CategorySlide);

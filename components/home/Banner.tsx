@@ -1,12 +1,13 @@
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
-import { FunctionComponent, useEffect, useState } from "react";
+import { random } from "lodash";
+import { FunctionComponent, memo, useEffect, useMemo, useState } from "react";
 import getDetailMovie from "../../api/services/getDetailMovie";
 import { useAppDispatch } from "../../hooks/redux";
 import {
   fetchDetailMovie,
   openPopupDetailMovie,
 } from "../../redux/slices/detailMovie";
-import { HomeSection, Movie } from "../../shared/types";
+import { Movie, RecommendContentVOList } from "../../shared/types";
 import Image, { SizeType } from "../common/Image";
 import AddFavorite from "../UI/AddFavorite";
 import BackdropLoading from "../UI/BackdropLoading";
@@ -16,14 +17,15 @@ import TagList from "../UI/TagList";
 import TimeLinePlayed from "../UI/TimeLinePlayed";
 import ViewDescription from "../UI/ViewDescription";
 interface BannerProps {
-  data: HomeSection;
+  recommendContentVOList: RecommendContentVOList[];
 }
 
 const Banner: FunctionComponent<BannerProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { data } = props;
-  const top = 1;
-  const filmBanner = data.recommendContentVOList[top - 1];
+  const { recommendContentVOList } = props;
+  const filmBanner = useMemo(() => {
+    return recommendContentVOList[random(1, 30)];
+  }, [recommendContentVOList]);
   // const detailMovie = useAppSelector((store) => store.detailMovie);
   const [detailMovie, setDetailMovie] = useState<Movie>();
 
@@ -78,11 +80,7 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
         <div className="flex items-center ">
           <div className="flex flex-col items-center justify-center w-12 h-12 mr-5 font-bold text-gray-800 bg-red-600 rounded-lg shadow-lg ">
             <span>TOP</span>
-            <span>{data.recommendContentVOList.length}</span>
-          </div>
-
-          <div className="text-2xl font-bold text-shadow">
-            #{top} in {filmBanner.contentType}
+            <span>{recommendContentVOList.length}</span>
           </div>
         </div>
         <div className="text-2xl md:text-3xl lg:text-5xl text-shadow">
@@ -108,4 +106,4 @@ const Banner: FunctionComponent<BannerProps> = (props) => {
   );
 };
 
-export default Banner;
+export default memo(Banner);
