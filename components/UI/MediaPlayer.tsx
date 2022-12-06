@@ -6,7 +6,9 @@ import getResourceMovie from "../../api/services/getResourceMovie";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { updateHistory } from "../../redux/slices/history";
 import { Movie, ResourceMovie, TypeResource } from "../../shared/types";
+import { getImage, SizeType } from "../common/Image";
 import Controls from "./Controls";
+import Loading from "./Loading";
 
 interface MediaPlayerProps {
   movie: Movie;
@@ -220,9 +222,12 @@ const MediaPlayer: FC<MediaPlayerProps> = (props) => {
       </div>
     </div>
   ) : (
-    <picture>
+    <picture className="relative">
+      <div className="absolute w-full h-full center">
+        <Loading />
+      </div>
       <img
-        src={movie.coverHorizontalUrl}
+        src={getImage(movie.coverHorizontalUrl, SizeType.cardHorizontal)}
         alt={movie.name}
         className="w-full h-full"
       />
