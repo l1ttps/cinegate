@@ -60,7 +60,7 @@ const SearchBar: FC = () => {
               value={search.query}
               onChange={handleOnChangeText}
               autoFocus
-              // onBlur={() => setTimeout(() => handleFocusOutSearchBar(), 500)}
+              onBlur={() => setTimeout(() => handleFocusOutSearchBar(), 500)}
               className="w-full px-3 outline-none bg-stone-800"
             />
           </div>
